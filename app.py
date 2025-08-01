@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # Load the trained model (saved from Jupyter notebook)
-model = joblib.load('random_forest_model.pkl')  # Make sure this file is in the same folder
+model = joblib.load('gradient_boosting_model.pkl')  # Make sure this file is in the same folder
 
 # Page setup
 st.set_page_config(page_title="House Price Predictor", layout="centered")
@@ -38,3 +38,4 @@ if submitted:
     price_million = prediction / 1_000_000
 
     st.success(f"🏷️ Estimated Price: **PKR {price_million:,.2f} Million**")
+
