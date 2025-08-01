@@ -28,7 +28,7 @@ st.sidebar.markdown("Adjust the inputs below to estimate the house price.")
 
 # --- Location Dropdown (for UI only, not used in model)
 st.sidebar.selectbox(
-    "📍 Select Location (for display only)",
+    "📍 Select Location of Property",
     ['LAHORE', 'Bahria Town', 'Islamabad', 'Peshawar', 'Pindi', 'Karachi', 'Gulberg', 'Faisal Town']
 )
 
@@ -68,4 +68,5 @@ st.markdown("""
         Created with ❤️ using <a href='https://streamlit.io' target='_blank'>Streamlit</a> | by <a href='www.linkedin.com/in/m-sikander-bakht' target='_blank'>SikanderKtk</a> | Trained on real data from <strong>Zameen.com</strong>
     </p>
 """, unsafe_allow_html=True)
+
 
