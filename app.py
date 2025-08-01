@@ -65,8 +65,9 @@ if st.sidebar.button("🔍 Predict Price"):
 st.markdown("""
     <hr style='border: 1px solid #ccc;'>
     <p style='text-align: center;'>
-        Created with ❤️ using <a href='https://streamlit.io' target='_blank'>Streamlit</a> | by <a href='www.linkedin.com/in/m-sikander-bakht' target='_blank'>SikanderKtk</a> | Trained on real data from <strong>Zameen.com</strong>
+        Created with ❤️ using <a href='https://streamlit.io' target='_blank'>Streamlit</a> | by <a href='https://github.com/SikanderKtk/Houce-Price-Analysis-Prediction' target='_blank'>SikanderKtk</a> | Trained on real data from <strong>Zameen.com</strong>
     </p>
 """, unsafe_allow_html=True)
+
 
 
