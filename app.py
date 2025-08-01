@@ -26,6 +26,12 @@ st.markdown("""
 st.sidebar.header("🛠️ Configure House Features")
 st.sidebar.markdown("Adjust the inputs below to estimate the house price.")
 
+# --- Location Dropdown (for UI only, not used in model)
+st.sidebar.selectbox(
+    "📍 Select Location (for display only)",
+    ['LAHORE', 'Bahria Town', 'Islamabad', 'Peshawar', 'Pindi', 'Karachi', 'Gulberg', 'Faisal Town']
+)
+
 # --- Input Form ---
 area = st.sidebar.slider("📏 Area (Marla)", 1, 1000, 5)
 bedrooms = st.sidebar.slider("🛏️ Bedrooms", 1, 10, 3)
@@ -59,6 +65,7 @@ if st.sidebar.button("🔍 Predict Price"):
 st.markdown("""
     <hr style='border: 1px solid #ccc;'>
     <p style='text-align: center;'>
-        Created with ❤️ using <a href='https://streamlit.io' target='_blank'>Streamlit</a> | Trained on real data from <strong>Zameen.com</strong>
+        Created with ❤️ using <a href='https://streamlit.io' target='_blank'>Streamlit</a> | by <a href='www.linkedin.com/in/m-sikander-bakht' target='_blank'>SikanderKtk</a> | Trained on real data from <strong>Zameen.com</strong>
     </p>
 """, unsafe_allow_html=True)
+
