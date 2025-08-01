@@ -2,30 +2,41 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the trained model (saved from Jupyter notebook)
-model = joblib.load('gradient_boosting_model.pkl')  # Make sure this file is in the same folder
+# Load trained model (make sure rf_model.pkl is in the same directory)
+model = joblib.load('gradient_boosting_model.pkl')
 
-# Page setup
-st.set_page_config(page_title="House Price Predictor", layout="centered")
-st.title("🏡 Zameen House Price Predictor (No Location)")
-st.markdown("Estimate house prices based on features like area, bedrooms, bathrooms, etc.")
+# Set Streamlit page configuration
+st.set_page_config(
+    page_title="House Price Predictor",
+    layout="centered",
+    page_icon="🏡"
+)
 
-# --- User Input Section ---
-with st.form("prediction_form"):
-    st.subheader("Enter House Features")
+# --- Main Title & Description ---
+st.markdown("""
+    <h1 style='text-align: center; color: #004d99;'>🏡 Zameen House Price Predictor</h1>
+    <p style='text-align: center; font-size: 18px;'>
+        Predict property prices in Pakistan based on features like area, bedrooms, bathrooms, and more.
+        Built using Machine Learning & trained on real data from Zameen.com.
+    </p>
+    <hr style='border: 1px solid #ccc;'>
+""", unsafe_allow_html=True)
 
-    area = st.number_input("Area (in Marla)", min_value=1.0, max_value=1000.0, value=5.0)
-    bedrooms = st.slider("Bedrooms", 1, 10, 3)
-    baths = st.slider("Bathrooms", 1, 10, 2)
-    house_age = st.number_input("House Age (in years)", min_value=0, max_value=100, value=5)
-    latitude = st.number_input("Latitude", value=33.6844, format="%.4f")
-    longitude = st.number_input("Longitude", value=73.0479, format="%.4f")
+# --- Sidebar ---
+st.sidebar.header("🛠️ Configure House Features")
+st.sidebar.markdown("Adjust the inputs below to estimate the house price.")
 
-    submitted = st.form_submit_button("Predict Price")
+# --- Input Form ---
+area = st.sidebar.slider("📏 Area (Marla)", 1, 1000, 5)
+bedrooms = st.sidebar.slider("🛏️ Bedrooms", 1, 10, 3)
+baths = st.sidebar.slider("🛁 Bathrooms", 1, 10, 2)
+house_age = st.sidebar.slider("🏗️ House Age (Years)", 0, 100, 5)
+latitude = st.sidebar.number_input("🌍 Latitude", value=33.6844, format="%.4f")
+longitude = st.sidebar.number_input("🌍 Longitude", value=73.0479, format="%.4f")
 
-# --- Prediction ---
-if submitted:
-    input_data = pd.DataFrame([{
+# --- Predict Button ---
+if st.sidebar.button("🔍 Predict Price"):
+    input_df = pd.DataFrame([{
         'area': area,
         'bedrooms': bedrooms,
         'baths': baths,
@@ -34,9 +45,20 @@ if submitted:
         'longitude': longitude
     }])
 
-    prediction = model.predict(input_data)[0]
+    prediction = model.predict(input_df)[0]
     price_million = prediction / 1_000_000
 
-    st.success(f"🏷️ Estimated Price: **PKR {price_million:,.2f} Million**")
+    st.markdown("""
+        <div style='background-color: #e6f7ff; padding: 20px; border-radius: 10px; border: 1px solid #99ccff;'>
+            <h2 style='color: #004d99;'>🏷️ Predicted House Price</h2>
+            <p style='font-size: 24px; color: #006600;'>PKR {:.2f} Million</p>
+        </div>
+    """.format(price_million), unsafe_allow_html=True)
 
-
+# --- Footer ---
+st.markdown("""
+    <hr style='border: 1px solid #ccc;'>
+    <p style='text-align: center;'>
+        Created with ❤️ using <a href='https://streamlit.io' target='_blank'>Streamlit</a> | Trained on real data from <strong>Zameen.com</strong>
+    </p>
+""", unsafe_allow_html=True)
